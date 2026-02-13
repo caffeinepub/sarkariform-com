@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a website (sarkariform.com) for publishing government recruitment information such as forms, admit cards, results, and answer keys.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Wordmark logo reading “SarkariForm” in a bold, legible style (sarkariform-logo.dim_1200x300.png)\n- Simple favicon icon with an “SF” monogram inside a rounded shape (sarkariform-favicon.dim_256x256.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-a-content-model-for-government-recruitment-publishing-with-post-types-recruitment-form-admit-card-result-answer-key-each-post-must-support-title-organization-department-exam-post-name-important-dates-as-labeled-key-value-pairs-eligibility-free-text-application-fee-free-text-age-limit-free-text-vacancy-selection-details-free-text-official-links-one-or-more-urls-with-labels-status-draft-published-tags-and-created-updated-timestamps",
+      "title": "Implement a content model for government recruitment publishing with post types: Recruitment Form, Admit Card, Result, Answer Key. Each post must support: title, organization/department, exam/post name, important dates (as labeled key/value pairs), eligibility (free text), application fee (free text), age limit (free text), vacancy/selection details (free text), official links (one or more URLs with labels), status (Draft/Published), tags, and created/updated timestamps.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-publishing-workflow-secured-by-internet-identity-only-authenticated-admins-can-create-edit-publish-unpublish-or-delete-posts-unauthenticated-users-can-only-browse-search-published-content",
+      "title": "Add an admin publishing workflow secured by Internet Identity: only authenticated admins can create, edit, publish/unpublish, or delete posts; unauthenticated users can only browse/search published content.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-public-facing-pages-for-sarkariform-com-home-category-landing-pages-for-each-post-type-recruitment-form-admit-card-result-answer-key-post-detail-page-and-a-site-wide-search-page",
+      "title": "Create public-facing pages for sarkariform.com: Home, category landing pages for each post type (Recruitment Form, Admit Card, Result, Answer Key), post detail page, and a site-wide search page.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-sorting-and-filtering-for-public-listings-sort-by-newest-updated-filter-by-organization-department-and-by-tags-allow-narrowing-by-year-based-on-created-date",
+      "title": "Add sorting and filtering for public listings: sort by newest/updated; filter by organization/department and by tags; allow narrowing by year (based on created date).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-seo-friendly-metadata-and-sharing-basics-for-public-pages-page-titles-meta-descriptions-and-a-consistent-canonical-like-url-structure-for-categories-and-posts",
+      "title": "Add SEO-friendly metadata and sharing basics for public pages: page titles, meta descriptions, and a consistent canonical-like URL structure for categories and posts.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-cohesive-visual-theme-for-the-site-colors-typography-spacing-and-components-suitable-for-an-information-dense-government-jobs-portal-and-apply-it-consistently-across-all-pages-avoid-blue-purple-as-primary-colors",
+      "title": "Create a cohesive visual theme for the site (colors, typography, spacing, and components) suitable for an information-dense government-jobs portal, and apply it consistently across all pages. Avoid blue/purple as primary colors.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-render-required-static-brand-assets-for-sarkariform-com-logo-favicon-and-integrate-them-into-the-header-and-browser-tab",
+      "title": "Generate and render required static brand assets for sarkariform.com (logo + favicon), and integrate them into the header and browser tab.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create sarkariform.com website to publish government recruitment forms, admit cards, results, and answer keys",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "sarkariform.com",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

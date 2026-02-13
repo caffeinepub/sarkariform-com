@@ -1,0 +1,286 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "sarkariform.com recruitment updates portal (frontend)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Admin UI forms to create/edit recruitment posts with the required structured fields and timestamp display.",
+      "acceptanceCriteria": [
+        "Frontend forms allow creating/editing all required fields.",
+        "Draft posts are not visible on public pages; Published posts are visible.",
+        "Posts display created/updated timestamps in the UI."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the app shell and route wiring for admin create/edit pages and public post detail pages so the content model fields can be created/edited and viewed."
+        },
+        {
+          "path": "frontend/src/features/posts/types.ts",
+          "operation": "create",
+          "description": "Define frontend helper types/mappers for RecruitmentPost, RecruitmentPostType, PostStatus, KeyValue (as consumed from the generated backend actor types) to drive forms and rendering."
+        },
+        {
+          "path": "frontend/src/features/posts/components/PostEditorForm.tsx",
+          "operation": "create",
+          "description": "Implement the admin post create/edit form covering: type, title, organization, exam/post name, important dates (labeled key/value pairs), eligibility, application fee, age limit, vacancy/selection details, official links (labeled URLs), tags, and status controls. Use shadcn-ui components for form controls and layout. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/posts/components/KeyValueEditor.tsx",
+          "operation": "create",
+          "description": "Create a reusable editor UI for labeled key/value pair arrays used by Important Dates and Official Links. Use shadcn-ui components for inputs/buttons. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/AdminPostNewPage.tsx",
+          "operation": "create",
+          "description": "Create an admin page that uses PostEditorForm to create a new post via backend capability calls and then navigates to edit/detail on success."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/AdminPostEditPage.tsx",
+          "operation": "create",
+          "description": "Create an admin page that loads an existing post and uses PostEditorForm to update, publish/unpublish, and delete the post via backend capability calls."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/PostDetailPage.tsx",
+          "operation": "create",
+          "description": "Render a post detail view that clearly displays all structured fields (dates, links, sections) and shows created/updated timestamps."
+        },
+        {
+          "path": "frontend/src/features/posts/hooks/usePosts.ts",
+          "operation": "create",
+          "description": "Add React Query hooks for reading posts for public views (published list, by type, by id) and for admin mutations (create/update/publish/unpublish/delete), delegating to the backend actor."
+        },
+        {
+          "path": "frontend/src/features/posts/components/PostCard.tsx",
+          "operation": "create",
+          "description": "Create a compact listing card for posts (title, organization, type, updated/created time, tags, status badge for admin) used across home/category/search results. Use shadcn-ui primitives for badges/buttons. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add Internet Identity sign-in and an admin-only publishing workflow UI (public browsing remains anonymous).",
+      "acceptanceCriteria": [
+        "A user can sign in with Internet Identity.",
+        "Non-admin authenticated users cannot mutate content.",
+        "Public users can read published content without signing in."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Implement a login/logout button using the selected authorization component guidance for Internet Identity login state and react-query cache clearing on logout. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Create a first-login modal prompting for the user's name and saving it via backend capability calls per the selected authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/auth/hooks/useAuthz.ts",
+          "operation": "create",
+          "description": "Add hooks to fetch caller role/admin status and caller profile using backend capability calls; include loading states that avoid profile modal flash per selected authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/AdminRoute.tsx",
+          "operation": "create",
+          "description": "Create a route guard that allows only authenticated admins to access admin pages; show an access denied screen otherwise. Implement guard logic using the selected authorization component concepts (role-based access). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/AccessDeniedScreen.tsx",
+          "operation": "create",
+          "description": "Create an access denied UI for unauthorized admin route access. Use shadcn-ui components for consistent styling. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/AdminDashboardPage.tsx",
+          "operation": "create",
+          "description": "Create an admin dashboard listing posts (including drafts) with actions to create, edit, publish/unpublish, and delete; ensure actions are hidden/disabled for non-admins even if they reach the page. Use shadcn-ui components for tables/buttons/dialog confirmations. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire LoginButton into the global header, mount ProfileSetupModal for authenticated users, and wrap /admin routes with AdminRoute so only admins can mutate content."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Create public pages: Home, post-type category listings, post detail, and site-wide search.",
+      "acceptanceCriteria": [
+        "Home page shows latest published items across all types.",
+        "Each category page lists only its corresponding post type with pagination or infinite load.",
+        "Post detail page renders all structured fields (dates, links, sections) clearly.",
+        "Search page returns published posts matching query across title/exam/organization/tags."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Implement public route structure for Home, category pages per post type, post detail, and search; ensure navigation links exist for all required pages."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteLayout.tsx",
+          "operation": "create",
+          "description": "Create a shared layout with header/nav (links to Home, each category, Search) and a content container suitable for dense information pages. Use shadcn-ui components where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Create a public Home page that loads and displays the latest published posts across all types using PostCard list sections."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/CategoryPage.tsx",
+          "operation": "create",
+          "description": "Create a reusable category listing page parameterized by post type (Recruitment Form, Admit Card, Result, Answer Key) and lists only that type with pagination or infinite load."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/SearchPage.tsx",
+          "operation": "create",
+          "description": "Create a public search page that queries published posts by text inputs matching title/exam/organization/tags (using available backend capability functions and/or client-side filtering when needed)."
+        },
+        {
+          "path": "frontend/src/features/posts/components/PaginationOrInfiniteLoad.tsx",
+          "operation": "create",
+          "description": "Implement a small reusable pagination or infinite-load control for listings, ensuring the chosen mode is used consistently on category pages."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add public listing sorting and filtering with shareable URL query params.",
+      "acceptanceCriteria": [
+        "Users can sort lists by Newest and Recently Updated.",
+        "Users can filter by organization/department (text or selectable list based on available data).",
+        "Users can filter by tag and by year.",
+        "Filters are reflected in the URL (query params) so pages are shareable."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/posts/components/ListFilterBar.tsx",
+          "operation": "create",
+          "description": "Create a filter/sort UI (sort: newest/updated; filters: organization text, tag, year) that reads/writes state to URL query params. Use shadcn-ui inputs/selects/popovers for controls. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/posts/hooks/useListingQueryParams.ts",
+          "operation": "create",
+          "description": "Implement a hook to parse/serialize listing query params (sort, organization, tag, year, page/cursor) and keep UI state in sync with the URL."
+        },
+        {
+          "path": "frontend/src/features/posts/utils/listingTransforms.ts",
+          "operation": "create",
+          "description": "Add pure helper functions to apply sorting and filtering to published posts (and to compute available years/tags/org suggestions when needed) while keeping behavior consistent across Home/category/search."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/CategoryPage.tsx",
+          "operation": "modify",
+          "description": "Integrate ListFilterBar and apply URL-driven sorting/filtering to the category listing results; ensure the listing remains shareable via query params."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/SearchPage.tsx",
+          "operation": "modify",
+          "description": "Integrate ListFilterBar and ensure search results can be further sorted/filtered, with all controls reflected in URL query params."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add SEO-friendly metadata (title/description) and consistent URL structure for public pages.",
+      "acceptanceCriteria": [
+        "Each public page sets a meaningful document title including “sarkariform.com” or “Sarkari Form”.",
+        "Post detail pages include a description derived from the post content (e.g., first paragraph/summary).",
+        "Category pages include type-specific titles/descriptions (e.g., “Latest Admit Cards”)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/seo/Seo.tsx",
+          "operation": "create",
+          "description": "Create a lightweight SEO helper component that sets document.title and (if present) updates/creates meta description tags for the current route."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Use Seo component to set title/description for the Home page including “SarkariForm” branding."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/CategoryPage.tsx",
+          "operation": "modify",
+          "description": "Use Seo component to set type-specific titles/descriptions for each category page (e.g., “Latest Admit Cards | SarkariForm”)."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/PostDetailPage.tsx",
+          "operation": "modify",
+          "description": "Use Seo component to set post title and a description derived from the post content (e.g., eligibility/vacancy details excerpt) and ensure canonical-like route structure is used for links."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/SearchPage.tsx",
+          "operation": "modify",
+          "description": "Use Seo component to set search page title/description and reflect current query in the title when present."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Create and apply a cohesive, readable theme (non-blue/purple primary) across all pages.",
+      "acceptanceCriteria": [
+        "Theme is consistent across navigation, listings, filters, and detail pages.",
+        "Layout remains readable for long-form content on mobile and desktop.",
+        "Primary color palette does not use blue/purple as the dominant brand color."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add Tailwind base styles and set CSS variables (used by shadcn-ui theme tokens) to a non-blue/purple primary palette (e.g., deep green/orange accents), with typography defaults optimized for dense listings and long-form detail pages. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions (if needed) to support the chosen palette and readable typography/spacing scales while keeping shadcn-ui token-based colors consistent. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteLayout.tsx",
+          "operation": "modify",
+          "description": "Apply consistent layout primitives (container widths, spacing, sticky header behavior if used) and ensure navigation/listing/filter/detail pages share the same visual language using shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/posts/pages/PostDetailPage.tsx",
+          "operation": "modify",
+          "description": "Use Tailwind typography utilities and consistent section components for readability on mobile/desktop; avoid overly wide text columns for long-form content."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Integrate generated logo and favicon, and apply consistent brand text across UI.",
+      "acceptanceCriteria": [
+        "Logo is stored under frontend/public/assets/generated and used in the site header.",
+        "Favicon is stored under frontend/public/assets/generated and configured for the app.",
+        "Brand text shown in UI is “SarkariForm” (or “sarkariform.com”) consistently."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/sarkariform-logo.dim_1200x300.png",
+          "operation": "create",
+          "description": "Add the generated wordmark logo asset file at frontend/public/assets/generated/sarkariform-logo.dim_1200x300.png."
+        },
+        {
+          "path": "frontend/public/assets/generated/sarkariform-favicon.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated favicon asset file at frontend/public/assets/generated/sarkariform-favicon.dim_256x256.png."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteLayout.tsx",
+          "operation": "modify",
+          "description": "Render the brand logo image from frontend/public/assets/generated/sarkariform-logo.dim_1200x300.png in the header and ensure the brand text is consistently “SarkariForm” (or “sarkariform.com”) in navigation and page headings."
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "create",
+          "description": "Create/modify the HTML entry to reference the favicon at frontend/public/assets/generated/sarkariform-favicon.dim_256x256.png and set a sensible default title for sarkariform.com (final titles overridden per-route by the Seo helper)."
+        }
+      ]
+    }
+  ]
+}

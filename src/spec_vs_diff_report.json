@@ -1,0 +1,89 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-13T10:38:41.647Z",
+  "summary": "Diff adds a Motoko backend content model + admin-guarded CRUD endpoints (partially visible due to truncation) and a new React/TanStack Router frontend with public pages (Home/Category/Detail/Search), admin pages, query-param-based filtering/sorting, and basic SEO title/description handling. Some requested items are not evidenced (pagination/infinite load, created timestamp display, favicon configuration). Also introduces unrequested user-profile onboarding modal and related backend profile APIs.",
+  "missing_requirements": [
+    {
+      "id": "REQ-3",
+      "requirement": "Each category landing page lists only its corresponding post type with pagination or infinite load.",
+      "reason": "CategoryPage filters by postType, but there is no evidence of pagination/infinite loading (no page size, cursor, load-more, or pagination controls shown).",
+      "evidence": [
+        "frontend/src/features/posts/pages/CategoryPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "requirement": "Posts display created/updated timestamps in the UI.",
+      "reason": "UI evidence shows updated timestamps (e.g., PostCard and PostDetailPage), but created timestamp display is not evidenced in the provided diffs (and PostDetailPage snippet only shows Updated).",
+      "evidence": [
+        "frontend/src/features/posts/components/PostCard.tsx",
+        "frontend/src/features/posts/pages/PostDetailPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Favicon is stored under frontend/public/assets/generated and configured for the app (browser tab).",
+      "reason": "Logo usage in the header is shown, but there is no evidence of favicon asset addition/configuration (e.g., in HTML head, manifest, or router/meta). Added public asset files are not shown, and no frontend head/HTML file changes are evidenced.",
+      "evidence": [
+        "frontend/src/components/layout/SiteLayout.tsx",
+        "frontend/src/App.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "User profile system (backend UserProfile storage + frontend ProfileSetupModal prompting for user name).",
+      "reason": "BuildRequest does not ask for user profiles or onboarding; it only requires admin publishing workflow secured by Internet Identity and public browsing/search.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/auth/ProfileSetupModal.tsx"
+      ]
+    },
+    {
+      "description": "Non-admin access control UX and routes beyond required publishing workflow (e.g., dedicated AccessDeniedScreen and AdminRoute wrapper components).",
+      "reason": "While admin-only mutations are required, these specific UI components/pages are not explicitly requested; they add extra UX behavior not specified in requirements.",
+      "evidence": [
+        "frontend/src/components/auth/AccessDeniedScreen.tsx",
+        "frontend/src/components/auth/AdminRoute.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.66,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/auth/AccessDeniedScreen.tsx",
+    "frontend/src/components/auth/AdminRoute.tsx",
+    "frontend/src/components/auth/LoginButton.tsx",
+    "frontend/src/components/auth/ProfileSetupModal.tsx",
+    "frontend/src/components/layout/SiteLayout.tsx",
+    "frontend/src/components/seo/Seo.tsx",
+    "frontend/src/features/posts/components/KeyValueEditor.tsx",
+    "frontend/src/features/posts/components/ListFilterBar.tsx",
+    "frontend/src/features/posts/components/PostCard.tsx",
+    "frontend/src/features/posts/components/PostEditorForm.tsx",
+    "frontend/src/features/posts/hooks/useListingQueryParams.ts",
+    "frontend/src/features/posts/pages/AdminDashboardPage.tsx",
+    "frontend/src/features/posts/pages/AdminPostEditPage.tsx",
+    "frontend/src/features/posts/pages/AdminPostNewPage.tsx",
+    "frontend/src/features/posts/pages/CategoryPage.tsx",
+    "frontend/src/features/posts/pages/HomePage.tsx",
+    "frontend/src/features/posts/pages/PostDetailPage.tsx",
+    "frontend/src/features/posts/pages/SearchPage.tsx",
+    "frontend/src/features/posts/utils/formatters.ts",
+    "frontend/src/features/posts/utils/listingTransforms.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

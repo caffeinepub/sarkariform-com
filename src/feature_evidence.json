@@ -1,0 +1,165 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-a-content-model-for-government-recruitment-publishing-with-post-types-recruitment-form-admit-card-result-answer-key-each-post-must-support-title-organization-department-exam-post-name-important-dates-as-labeled-key-value-pairs-eligibility-free-text-application-fee-free-text-age-limit-free-text-vacancy-selection-details-free-text-official-links-one-or-more-urls-with-labels-status-draft-published-tags-and-created-updated-timestamps",
+      "featureTitle": "Implement a content model for government recruitment publishing with post types: Recruitment Form, Admit Card, Result, Answer Key. Each post must support: title, organization/department, exam/post name, important dates (as labeled key/value pairs), eligibility (free text), application fee (free text), age limit (free text), vacancy/selection details (free text), official links (one or more URLs with labels), status (Draft/Published), tags, and created/updated timestamps.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/features/posts/components/KeyValueEditor.tsx",
+        "frontend/src/features/posts/components/PostCard.tsx",
+        "frontend/src/features/posts/components/PostEditorForm.tsx",
+        "frontend/src/features/posts/pages/AdminPostEditPage.tsx",
+        "frontend/src/features/posts/pages/AdminPostNewPage.tsx",
+        "frontend/src/features/posts/pages/PostDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-admin-publishing-workflow-secured-by-internet-identity-only-authenticated-admins-can-create-edit-publish-unpublish-or-delete-posts-unauthenticated-users-can-only-browse-search-published-content",
+      "featureTitle": "Add an admin publishing workflow secured by Internet Identity: only authenticated admins can create, edit, publish/unpublish, or delete posts; unauthenticated users can only browse/search published content.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/AccessDeniedScreen.tsx",
+        "frontend/src/components/auth/AdminRoute.tsx",
+        "frontend/src/components/auth/LoginButton.tsx",
+        "frontend/src/components/auth/ProfileSetupModal.tsx",
+        "frontend/src/features/posts/pages/AdminDashboardPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-public-facing-pages-for-sarkariform-com-home-category-landing-pages-for-each-post-type-recruitment-form-admit-card-result-answer-key-post-detail-page-and-a-site-wide-search-page",
+      "featureTitle": "Create public-facing pages for sarkariform.com: Home, category landing pages for each post type (Recruitment Form, Admit Card, Result, Answer Key), post detail page, and a site-wide search page.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/SiteLayout.tsx",
+        "frontend/src/features/posts/pages/CategoryPage.tsx",
+        "frontend/src/features/posts/pages/HomePage.tsx",
+        "frontend/src/features/posts/pages/SearchPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-sorting-and-filtering-for-public-listings-sort-by-newest-updated-filter-by-organization-department-and-by-tags-allow-narrowing-by-year-based-on-created-date",
+      "featureTitle": "Add sorting and filtering for public listings: sort by newest/updated; filter by organization/department and by tags; allow narrowing by year (based on created date).",
+      "files": [
+        "frontend/src/features/posts/components/ListFilterBar.tsx",
+        "frontend/src/features/posts/hooks/useListingQueryParams.ts",
+        "frontend/src/features/posts/pages/CategoryPage.tsx",
+        "frontend/src/features/posts/pages/SearchPage.tsx",
+        "frontend/src/features/posts/utils/listingTransforms.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-seo-friendly-metadata-and-sharing-basics-for-public-pages-page-titles-meta-descriptions-and-a-consistent-canonical-like-url-structure-for-categories-and-posts",
+      "featureTitle": "Add SEO-friendly metadata and sharing basics for public pages: page titles, meta descriptions, and a consistent canonical-like URL structure for categories and posts.",
+      "files": [
+        "frontend/src/components/seo/Seo.tsx",
+        "frontend/src/features/posts/pages/CategoryPage.tsx",
+        "frontend/src/features/posts/pages/HomePage.tsx",
+        "frontend/src/features/posts/pages/PostDetailPage.tsx",
+        "frontend/src/features/posts/pages/SearchPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-cohesive-visual-theme-for-the-site-colors-typography-spacing-and-components-suitable-for-an-information-dense-government-jobs-portal-and-apply-it-consistently-across-all-pages-avoid-blue-purple-as-primary-colors",
+      "featureTitle": "Create a cohesive visual theme for the site (colors, typography, spacing, and components) suitable for an information-dense government-jobs portal, and apply it consistently across all pages. Avoid blue/purple as primary colors.",
+      "files": [
+        "frontend/src/components/layout/SiteLayout.tsx",
+        "frontend/src/features/posts/pages/PostDetailPage.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-generate-and-render-required-static-brand-assets-for-sarkariform-com-logo-favicon-and-integrate-them-into-the-header-and-browser-tab",
+      "featureTitle": "Generate and render required static brand assets for sarkariform.com (logo + favicon), and integrate them into the header and browser tab.",
+      "files": [
+        "frontend/index.html",
+        "frontend/src/components/layout/SiteLayout.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
